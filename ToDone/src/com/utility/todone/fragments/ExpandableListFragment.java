@@ -1,34 +1,28 @@
 package com.utility.todone.fragments;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.Toast;
 
 import com.utility.activities.todone.R;
-import com.utility.todone.adapters.ExpandableListAdapter;
-import com.utility.todone.enums.Ranking;
 import com.utility.todone.models.Task;
 import com.utility.todone.models.TaskList;
 
 public class ExpandableListFragment extends Fragment {
 	
 	Context _context;
+	TaskList _taskList;
  
     public ExpandableListFragment(Activity activity) {
+    	setHasOptionsMenu(true);
     	_context = activity;
     }
 	
@@ -38,8 +32,25 @@ public class ExpandableListFragment extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_expandable_list, container, false);
 
-		new TaskList(_context, (ExpandableListView) view.findViewById(R.id.expandable_list));
+		_taskList = new TaskList(_context, (ExpandableListView) view.findViewById(R.id.expandable_list));
         
         return view;
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.expandable_list_fragment, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.add_task:
+			_taskList.add(new Task("New"));
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }
