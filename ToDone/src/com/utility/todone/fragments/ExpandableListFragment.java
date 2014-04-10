@@ -20,14 +20,16 @@ import android.widget.Toast;
 
 import com.utility.activities.todone.R;
 import com.utility.todone.adapters.ExpandableListAdapter;
+import com.utility.todone.enums.Ranking;
+import com.utility.todone.models.Task;
 
 public class ExpandableListFragment extends Fragment {
 	
 	Context _context;
 	ExpandableListAdapter _listAdapter;
     ExpandableListView _expListView;
-    List<String> _listDataHeader;
-    HashMap<String, List<String>> _listDataChild;
+    List<Task> _listDataHeader;
+    HashMap<Task, List<Task>> _listDataChild;
  
     public ExpandableListFragment(Activity activity) {
     	_context = activity;
@@ -69,7 +71,7 @@ public class ExpandableListFragment extends Fragment {
             @Override
             public void onGroupExpand(int groupPosition) {
                 Toast.makeText(_context,
-                        _listDataHeader.get(groupPosition) + " Expanded",
+                        _listDataHeader.get(groupPosition).getTitle() + " Expanded",
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -80,7 +82,7 @@ public class ExpandableListFragment extends Fragment {
             @Override
             public void onGroupCollapse(int groupPosition) {
                 Toast.makeText(_context,
-                        _listDataHeader.get(groupPosition) + " Collapsed",
+                        _listDataHeader.get(groupPosition).getTitle() + " Collapsed",
                         Toast.LENGTH_SHORT).show();
  
             }
@@ -95,11 +97,11 @@ public class ExpandableListFragment extends Fragment {
                 // TODO Auto-generated method stub
                 Toast.makeText(
                         _context,
-                        _listDataHeader.get(groupPosition)
+                        _listDataHeader.get(groupPosition).getTitle()
                                 + " : "
                                 + _listDataChild.get(
                                         _listDataHeader.get(groupPosition)).get(
-                                        childPosition), Toast.LENGTH_SHORT)
+                                        childPosition).getTitle(), Toast.LENGTH_SHORT)
                         .show();
                 return false;
             }
@@ -112,38 +114,38 @@ public class ExpandableListFragment extends Fragment {
      * Preparing the list data
      */
     private void prepareListData() {
-        _listDataHeader = new ArrayList<String>();
-        _listDataChild = new HashMap<String, List<String>>();
+        _listDataHeader = new ArrayList<Task>();
+        _listDataChild = new HashMap<Task, List<Task>>();
  
         // Adding child data
-        _listDataHeader.add("Top 250");
-        _listDataHeader.add("Now Showing");
-        _listDataHeader.add("Coming Soon..");
+        _listDataHeader.add(new Task("Top 250"));
+        _listDataHeader.add(new Task("Now Showing"));
+        _listDataHeader.add(new Task("Coming Soon.."));
  
         // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+        List<Task> top250 = new ArrayList<Task>();
+        top250.add(new Task("The Shawshank Redemption"));
+        top250.add(new Task("The Godfather"));
+        top250.add(new Task("The Godfather: Part II"));
+        top250.add(new Task("Pulp Fiction"));
+        top250.add(new Task("The Good, the Bad and the Ugly"));
+        top250.add(new Task("The Dark Knight"));
+        top250.add(new Task("12 Angry Men"));
  
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+        List<Task> nowShowing = new ArrayList<Task>();
+        nowShowing.add(new Task("The Conjuring"));
+        nowShowing.add(new Task("Despicable Me 2"));
+        nowShowing.add(new Task("Turbo"));
+        nowShowing.add(new Task("Grown Ups 2"));
+        nowShowing.add(new Task("Red 2"));
+        nowShowing.add(new Task("The Wolverine"));
  
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+        List<Task> comingSoon = new ArrayList<Task>();
+        comingSoon.add(new Task("2 Guns"));
+        comingSoon.add(new Task("The Smurfs 2"));
+        comingSoon.add(new Task("The Spectacular Now"));
+        comingSoon.add(new Task("The Canyons"));
+        comingSoon.add(new Task("Europa Report"));
  
         _listDataChild.put(_listDataHeader.get(0), top250); // Header, Child data
         _listDataChild.put(_listDataHeader.get(1), nowShowing);

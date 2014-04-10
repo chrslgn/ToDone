@@ -12,16 +12,17 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.utility.activities.todone.R;
+import com.utility.todone.models.Task;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 	private Context _context;
-    private List<String> _listDataHeader; // header titles
+    private List<Task> _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
+    private HashMap<Task, List<Task>> _listDataChild;
  
-    public ExpandableListAdapter(Context context, List<String> listDataHeader,
-            HashMap<String, List<String>> listChildData) {
+    public ExpandableListAdapter(Context context, List<Task> listDataHeader,
+            HashMap<Task, List<Task>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -42,7 +43,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
             boolean isLastChild, View convertView, ViewGroup parent) {
  
-        final String childText = (String) getChild(groupPosition, childPosition);
+        final String childText = ((Task) getChild(groupPosition, childPosition)).getTitle();
  
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -81,7 +82,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
             View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
+        String headerTitle = ((Task) getGroup(groupPosition)).getTitle();
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
