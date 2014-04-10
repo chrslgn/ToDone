@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.utility.activities.todone.R;
+import com.utility.todone.dialogs.CreateTaskDialog;
 import com.utility.todone.models.Task;
 import com.utility.todone.models.TaskList;
 
@@ -46,7 +47,7 @@ public class ExpandableListFragment extends Fragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.add_task:
-			_taskList.add(new Task("New"));
+			(new CreateTaskDialog(_taskList)).show(getFragmentManager(), null);
 			return true;
 
 		default:

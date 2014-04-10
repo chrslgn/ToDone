@@ -10,6 +10,8 @@ public class Task {
 	String _title;
 	String _description;
 	
+	Long _createdAt = System.currentTimeMillis();
+	
 	public Task(String title) {
 		_title = title;
 		_description = null;
