@@ -1,7 +1,6 @@
 package com.utility.todone.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
@@ -21,7 +20,6 @@ public class TaskList {
 	ExpandableListAdapter _listAdapter;
     ExpandableListView _expListView;
     List<Task> _listDataHeader = new ArrayList<Task>();
-    HashMap<Task, List<Task>> _listDataChild = new HashMap<Task, List<Task>>();
     
     public TaskList(Context context, ExpandableListView expListView) {
     	
@@ -29,7 +27,7 @@ public class TaskList {
     	// get the listview
         _expListView = expListView;
  
-        _listAdapter = new ExpandableListAdapter(context, _listDataHeader, _listDataChild);
+        _listAdapter = new ExpandableListAdapter(context, _listDataHeader);
  
         // setting list adapter
         _expListView.setAdapter(_listAdapter);
@@ -81,8 +79,7 @@ public class TaskList {
                         _context,
                         _listDataHeader.get(groupPosition).getTitle()
                                 + " : "
-                                + _listDataChild.get(
-                                        _listDataHeader.get(groupPosition)).get(
+                                + _listDataHeader.get(groupPosition).getChild(
                                         childPosition).getTitle(), Toast.LENGTH_SHORT)
                         .show();
                 return false;
@@ -91,7 +88,6 @@ public class TaskList {
     }
 
 	public void add(Task task) {
-		
 		_listDataHeader.add(task);
 		_listAdapter.notifyDataSetChanged();
 		

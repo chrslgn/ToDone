@@ -14,7 +14,6 @@ import android.widget.ExpandableListView;
 
 import com.utility.activities.todone.R;
 import com.utility.todone.dialogs.CreateTaskDialog;
-import com.utility.todone.models.Task;
 import com.utility.todone.models.TaskList;
 
 public class ExpandableListFragment extends Fragment {

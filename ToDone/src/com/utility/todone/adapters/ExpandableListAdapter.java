@@ -1,6 +1,5 @@
 package com.utility.todone.adapters;
 
-import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
@@ -18,20 +17,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 	private Context _context;
     private List<Task> _listDataHeader; // header titles
-    // child data in format of header title, child title
-    private HashMap<Task, List<Task>> _listDataChild;
  
-    public ExpandableListAdapter(Context context, List<Task> listDataHeader,
-            HashMap<Task, List<Task>> listChildData) {
+    public ExpandableListAdapter(Context context, List<Task> listDataHeader) {
         this._context = context;
         this._listDataHeader = listDataHeader;
-        this._listDataChild = listChildData;
     }
  
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .get(childPosititon);
+        return _listDataHeader.get(groupPosition).getChild(childPosititon);
     }
  
     @Override
@@ -60,11 +54,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
  
     @Override
     public int getChildrenCount(int groupPosition) {
-    	Task header = _listDataHeader.get(groupPosition);
-    	if (_listDataChild.containsKey(header))
-    		return this._listDataChild.get(header).size();
-    	else
-    		return 0;
+    	return _listDataHeader.get(groupPosition).getChildCount();
     }
  
     @Override

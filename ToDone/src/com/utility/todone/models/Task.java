@@ -1,5 +1,7 @@
 package com.utility.todone.models;
 
+import java.util.ArrayList;
+
 import com.utility.todone.enums.Ranking;
 
 public class Task {
@@ -9,6 +11,7 @@ public class Task {
 	Ranking _effort;
 	String _title;
 	String _description;
+	ArrayList<Task> _listDataChild = new ArrayList<Task>();
 	
 	Long _createdAt = System.currentTimeMillis();
 	
@@ -34,6 +37,18 @@ public class Task {
 		_importance = importance;
 		_urgency = urgency;
 		_effort = effort;
+	}
+	
+	public void addChildTask(Task child) {
+		_listDataChild.add(child);
+	}
+	
+	public Task getChild(int index) {
+		return _listDataChild.get(index);
+	}
+	
+	public int getChildCount() {
+		return _listDataChild.size();
 	}
 	
 	public String getTitle() { return _title; }

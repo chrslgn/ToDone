@@ -15,7 +15,7 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f070003;
-        public static final int add_task=0x7f070018;
+        public static final int add_task=0x7f07001c;
         public static final int create_task_description=0x7f070005;
         public static final int create_task_title=0x7f070004;
         public static final int effort=0x7f07000c;
@@ -31,9 +31,13 @@ public final class R {
         public static final int importance_low=0x7f07000a;
         public static final int importance_medium=0x7f070009;
         public static final int lblListHeader=0x7f070015;
-        public static final int lblListItem=0x7f070016;
+        public static final int lblListItem=0x7f07001a;
+        public static final int list_header_effort=0x7f070018;
+        public static final int list_header_importance=0x7f070016;
+        public static final int list_header_urgency=0x7f070017;
+        public static final int list_item_button=0x7f070019;
         public static final int main_layout=0x7f070000;
-        public static final int menu_settings=0x7f070017;
+        public static final int menu_settings=0x7f07001b;
         public static final int urgency=0x7f070011;
         public static final int urgency_high=0x7f070012;
         public static final int urgency_label=0x7f070010;
